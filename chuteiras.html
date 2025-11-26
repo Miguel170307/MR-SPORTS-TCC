@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRSports - Chuteiras</title>        
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --amarelo-bg: #FFF3CD;
+            --amarelo-destaque: #e0c888;
+            --marrom-escuro: #5a4a3a;
+            --marrom-claro: #b78a5a;
+            --verde-destaque: #28a745;
+        }
+        
+        body {
+            background-color: var(--amarelo-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        #nav {
+            background: linear-gradient(to right, #d2a679, var(--marrom-claro)) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+        }
+        .navbar-nav .nav-link {
+            color: var(--marrom-escuro) !important;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #3a2e24 !important;
+            transform: translateY(-2px);
+        }
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--marrom-escuro);
+            transition: width 0.3s;
+        }
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+        #carrinho img {
+            transition: transform 0.3s;
+        }
+        #carrinho:hover img {
+            transform: scale(1.1);
+        }
+        
+        .section-title {
+            color: var(--marrom-escuro);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--amarelo-destaque);
+            bottom: -10px;
+            left: 25%;
+        }
+        
+        .card {
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: none;
+            border-radius: 12px !important;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--amarelo-destaque);
+        }
+        .badge-bebida {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .badge-popular {
+            background: #dc3545;
+        }
+        .badge-new {
+            background: #17a2b8;
+        }
+        .bebida-price {
+            color: var(--marrom-escuro) !important;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .card-text {
+            color: #555;
+            min-height: 60px;
+        }
+        .add-to-cart {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .quantity-select {
+            width: 80px;
+            margin-right: 15px;
+            border: 1px solid var(--amarelo-destaque);
+            border-radius: 5px;
+            padding: 8px;
+        }
+        .btn-adicionar {
+            background: var(--verde-destaque);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            flex-grow: 1;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-adicionar:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .carrinho-painel {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            width: 280px;
+            background: white;
+            padding: 20px;
+            border: 1px solid var(--amarelo-destaque);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        .carrinho-painel:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .carrinho-painel h4 {
+            color: var(--marrom-escuro);
+            border-bottom: 2px solid var(--amarelo-destaque);
+            padding-bottom: 10px;
+        }
+        .btn-remover {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-remover:hover {
+            background: #bb2d3b;
+            transform: scale(1.1);
+        }
+        
+        footer {
+            background: var(--marrom-escuro) !important;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+        .footer-logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        .footer-title {
+            color: var(--amarelo-destaque);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .footer-contact i {
+            color: var(--amarelo-destaque);
+            margin-right: 10px;
+            width: 20px;
+        }
+        .footer-divider {
+            border-color: rgba(255,255,255,0.1) !important;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+<div id="carrinho-painel" class="carrinho-painel">
+    <h4>Seu Pedido</h4>
+    <div id="carrinho-itens">
+        <p>Carrinho vazio</p>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light" id="nav">
+    <div class="container">
+        <a class="navbar-brand" href="Pg-Inicial.html">
+            <img src="LOGO.png" class="rounded" alt="MRSports" height="80">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="Pg-Inicial.html"><strong>Início</strong></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="camisetas.html"><strong>Camisetas</strong></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="calcao.html   "><strong>Calção</strong></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="chuteiras.html"><strong>Chuteiras</strong></a>
+                </li>
+            </ul>
+            <a class="nav-link" href="carrinho.html" id="carrinho">
+                <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" height="35">
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mb-5">
+    <h2 class="text-center section-title">Nossas Chuteiras</h2>
+    
+    <div class="row g-4">
+        <!-- Nike Mercurial Vapor 16 -->
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="13" data-produto-preco="6.00">
+                <img class="card-img-top" src="CHUTEIRA NIKE MERCURIAL VAPOR 16.jpg" alt="Coca-Cola 350mL">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Nike Mercurial Vapor 16</h5>
+                    <div class="bebida-price my-3">R$ 279,90</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     <!-- Nike Phantom 6 Azul e Vermelho -->
+
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="18" data-produto-preco="10.00">
+                <img class="card-img-top" src="CHUTEIRA NIKE PHANTOM 6 AZUL E VERMELHO.jpg" alt="Coca-Cola 1L">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Nike Phantom 6 Azul e Vermelho</h5>
+                    <div class="bebida-price my-3">R$ 259,90</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Nike Phantom 6 Verde -->
+    
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="19" data-produto-preco="15.00">
+                <img class="card-img-top" src="CHUTEIRA NIKE PHANTOM 6.jpg" alt="Coca-Cola 2L">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Nike Phantom 6 Verde</h5>
+                    <div class="bebida-price my-3">R$ 279,90</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+             <!-- Chuteira Phantom Luna Rosa -->
+
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="17" data-produto-preco="5.00">
+                <img class="card-img-top" src="CHUTEIRA NIKE PHANTOM LUNA 2.jpg" alt="Guaraná Antarctica 350mL">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Chuteira Phantom Luna Rosa</h5>
+                    <div class="bebida-price my-3">R$ 00,00</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+         <!-- Chuteira Nike SuperFly Amarela -->
+
+
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="16" data-produto-preco="5.00">
+                <img class="card-img-top" src="CHUTEIRA NIKE MERCURIAL SUPERFLYE + AMARELO.jpg" alt="Sprite 350mL">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Chuteira Nike SuperFly Amarela</h5>
+                    <div class="bebida-price my-3">R$ 00,00</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+             <!-- Chuteira Nike Vapor 16 Preta -->
+
+        
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="14" data-produto-preco="5.00">
+                <img class="card-img-top" src="CHUTEIRA NIKE VAPOR 16.jpg" alt="Fanta Laranja 350ml">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Chuteira Nike Vapor 16 Preta</h5>
+                    <div class="bebida-price my-3">R$ 00,00</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+             <!-- Chuteira Adidas Predator Verde -->
+
+        
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="15" data-produto-preco="5.00">
+                <img class="card-img-top" src="CHUTEIRA ADIDAS PREDATOR VERDE.jpg" alt="Fanta Uva 350ml">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Chuteira Adidas Predator Verde</h5>
+                    <div class="bebida-price my-3">R$ 0,00</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chuteira Adidas F50 Rosa -->
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="20" data-produto-preco="10.00">
+                <img class="card-img-top" src="CHUTEIRA ADIDAS F50 LEAGUE ROSA.jpg" alt="Suco de Laranja 500ml">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Chuteira Adidas F50 Rosa</h5>
+                    <div class="bebida-price my-3">R$ 10,00</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+     <!-- Chuteira Adidas F50 Club Roxo  -->
+
+
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="21" data-produto-preco="12.00">
+                <img class="card-img-top" src="CHUTEIRA ADIDAS F50 CLUB ROXO.jpg" alt="Suco de Uva 500ml">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Chuteira Adidas F50 Club Roxo</h5>
+                    <div class="bebida-price my-3">R$ 00,00</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                   <!-- Chuteira Puma Future 7 Ultimate Campo-->
+
+        <div class="col-md-4">
+            <div class="card h-100" data-produto-id="22" data-produto-preco="15.00">
+                <img class="card-img-top" src="CHUTEIRA PUMA FUTURE 7 ULTIMATE CAMPO.jpg" alt="Suco de Maracujá 500ml">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Chuteira Puma Future 7 Ultimate Campo</h5>
+                    <div class="bebida-price my-3">R$ 00,00</div>
+                    <div class="add-to-cart">
+                        <select class="quantity-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <button class="btn-adicionar">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+<footer class="text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="social-icons mt-3">
+                    <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h5 class="footer-title">Contato</h5>
+                <ul class="list-unstyled footer-contact">
+                    <li class="mb-2"><i class="fas fa-phone"></i> (11) 99641-3476</li>
+                    <li><i class="fas fa-envelope"></i> contato@mrsposts.com.br</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0">&copy; MRSports. Todos os direitos reservados.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="text-white mx-2">Política de Privacidade</a>
+                <a href="#" class="text-white mx-2">Termos de Uso</a>
+                <a href="#" class="text-white">Contato</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</html>
