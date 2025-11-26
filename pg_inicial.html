@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MRSports</title>
+    <link rel="stylesheet" href="Pg-Inicio.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    :root {
+      --amarelo-bg: #fff3cd;
+      --amarelo-destaque: #e0c888;
+      --marrom-escuro: #5a4a3a;
+      --marrom-claro: #b78a5a;
+    }
+
+    body {
+      background-color: var(--amarelo-bg);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #nav {
+      background: linear-gradient(
+        to right,
+        #d2a679,
+        var(--marrom-claro)
+      ) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+    }
+    .navbar-nav .nav-link {
+      color: var(--marrom-escuro) !important;
+      font-weight: 600;
+      margin: 0 10px;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #3a2e24 !important;
+      transform: translateY(-2px);
+    }
+    .navbar-nav .nav-link::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--marrom-escuro);
+      transition: width 0.3s;
+    }
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+    #carrinho img {
+      transition: transform 0.3s;
+    }
+    #carrinho:hover img {
+      transform: scale(1.1);
+    }
+
+    .hero-section {
+      background: url("") no-repeat center/cover;
+      height: 500px;
+      position: relative;
+      margin-bottom: 50px;
+    }
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      max-width: 600px;
+    }
+    .hero-title {
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .btn-hero {
+      background: var(--amarelo-destaque);
+      border: none;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-hero:hover {
+      background: #d4b970;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .carrinho-painel {
+      position: fixed;
+      top: 120px;
+      right: 20px;
+      width: 280px;
+      background: white;
+      padding: 20px;
+      border: 1px solid var(--amarelo-destaque);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+    .carrinho-painel:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    .carrinho-painel h4 {
+      color: var(--marrom-escuro);
+      border-bottom: 2px solid var(--amarelo-destaque);
+      padding-bottom: 10px;
+    }
+    .btn-remover {
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-remover:hover {
+      background: #bb2d3b;
+      transform: scale(1.1);
+    }
+
+    .section-title {
+      color: var(--marrom-escuro);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 40px;
+    }
+    .section-title::after {
+      content: "";
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background: var(--amarelo-destaque);
+      bottom: -10px;
+      left: 25%;
+    }
+    .card {
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s;
+      border: none;
+      border-radius: 12px !important;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    .card-img-top {
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--amarelo-destaque);
+    }
+    .badge-vendido {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #dc3545;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .combo-price {
+      color: var(--marrom-escuro) !important;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .btn-adicionar {
+      background: #28a745;
+      border: none;
+      transition: all 0.3s;
+      font-weight: 600;
+    }
+    .btn-adicionar:hover {
+      background: #218838;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: var(--marrom-escuro) !important;
+      padding: 50px 0 20px;
+      margin-top: 80px;
+    }
+    .footer-logo {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+    .footer-title {
+      color: var(--amarelo-destaque);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    .footer-contact i {
+      color: var(--amarelo-destaque);
+      margin-right: 10px;
+      width: 20px;
+    }
+    .footer-divider {
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      margin: 30px 0;
+    }
+  </style>
+  <body>
+    <div id="carrinho-painel" class="carrinho-painel">
+      <h4>Seu Pedido</h4>
+      <div id="carrinho-itens">
+        <p>Carrinho vazio</p>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light" id="nav">
+      <div class="container">
+        <a class="navbar-brand" href="Pg-Inicial.html">
+          <img src="LOGO.png" class="rounded" alt="MRSports" height="80" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="Pg-Inicial.html"
+                ><strong>Início</strong></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="camisetas.html"
+                ><strong>Camisetas</strong></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="calcao.html"><strong>Calção</strong></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="chuteiras.html"
+                ><strong>Chuteiras</strong></a
+              >
+            </li>
+          </ul>
+          <a class="nav-link" href="carrinho.html" id="carrinho">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
+              height="35"
+              style="transition: all 0.3s"
+            />
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero-section">
+      <div class="hero-overlay"></div>
+      <div class="container h-100 d-flex align-items-center">
+        <div class="hero-content">
+          <h1 class="hero-title fw-bold mb-4">
+            Os melhores preços de artigos esportivos
+          </h1>
+          <p class="lead mb-4">
+            Somente aqui na MRSports, você encontra os melhores preços de
+            camisetas, calções e chuteiras.
+          </p>
+          <a href="camisetas.html" class="btn btn-hero btn-lg">Ver Catálogo</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="container mb-5">
+      <h2 class="text-center section-title">Mais Vendidos</h2>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div
+            class="card h-100"
+            data-produto-id="9"
+            data-produto-preco="279.90"
+          >
+            <span class="badge-vendido text-white">LANÇAMENTO</span>
+            <img
+              class="card-img-top"
+              src="CHUTEIRA NIKE MERCURIAL VAPOR 16.jpg"
+              alt="Chuteira Nike Mercurial Vapor"
+            />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Chuteira Mercurial Nike</h5>
+              <div class="combo-price my-3">R$ 00,00</div>
+              <p class="card-text">
+                • 1 Chuteira Mercurial Nike Vapor 16 <br />
+              </p>
+              <button class="btn btn-adicionar btn-success mt-auto">
+                Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div
+            class="card h-100"
+            data-produto-id="100"
+            data-produto-preco="00.00"
+          >
+            <img
+              class="card-img-top"
+              src="CHUTEIRA ADIDAS PREDATOR VERDE.jpg"
+              alt="Chuteira Adidas PREDATOR Verde"
+            />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Chuteira Adidas PREDATOR</h5>
+              <div class="combo-price my-3">R$ 00,00</div>
+              <p class="card-text">• 1 Chuteira Adidas PREDATOR <br /></p>
+              <button class="btn btn-adicionar btn-success mt-auto">
+                Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div
+            class="card h-100"
+            data-produto-id="101"
+            data-produto-preco="199.90"
+          >
+            <span class="badge-vendido text-white">TOP 1 EM VENDAS</span>
+            <img
+              class="card-img-top"
+              src="REAL MADRID 2025.jpg"
+              alt="Camiseta Real Madrid"
+            />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Camiseta Real Madrid</h5>
+              <div class="combo-price my-3">R$ 199,90</div>
+              <p class="card-text">• 1 Camiseta Real Madrid 2025 <br /></p>
+              <button class="btn btn-adicionar btn-success mt-auto">
+                Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <div class="social-icons mt-3">
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <h5 class="footer-title">Contato</h5>
+            <ul class="list-unstyled footer-contact">
+              <li class="mb-2"><i class="fas fa-phone"></i> (11) 99641-3476</li>
+              <li><i class="fas fa-envelope"></i> contato@mrsposts.com.br</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="footer-divider" />
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start">
+            <p class="mb-0">&copy; MRSports. Todos os direitos reservados.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <a href="#" class="text-white mx-2">Política de Privacidade</a>
+            <a href="#" class="text-white mx-2">Termos de Uso</a>
+            <a href="#" class="text-white">Contato</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      const Carrinho = {
+        obter: function () {
+          return JSON.parse(localStorage.getItem("cart")) || [];
+        },
+
+        salvar: function (carrinho) {
+          localStorage.setItem("cart", JSON.stringify(carrinho));
+          this.atualizarUI();
+        },
+
+        adicionar: function (
+          produtoId,
+          produtoNome,
+          produtoPreco,
+          quantidade,
+          produtoImagem
+        ) {
+          let carrinho = this.obter();
+          const itemExistente = carrinho.find((item) => item.id === produtoId);
+
+          if (itemExistente) {
+            itemExistente.quantity += parseInt(quantidade);
+          } else {
+            carrinho.push({
+              id: produtoId,
+              name: produtoNome,
+              price: parseFloat(produtoPreco),
+              image: produtoImagem,
+              quantity: parseInt(quantidade),
+            });
+          }
+
+          this.salvar(carrinho);
+        },
+
+        remover: function (produtoId) {
+          let carrinho = this.obter();
+          carrinho = carrinho.filter((item) => item.id !== produtoId);
+          this.salvar(carrinho);
+        },
+
+        calcularTotal: function () {
+          return this.obter().reduce((total, item) => {
+            return total + item.price * item.quantity;
+          }, 0);
+        },
+
+        atualizarUI: function () {
+          const carrinho = this.obter();
+          const carrinhoItens = document.getElementById("carrinho-itens");
+          let html = "";
+
+          if (carrinho.length > 0) {
+            html += '<ul style="list-style: none; padding: 0;">';
+
+            carrinho.forEach((item) => {
+              const subtotal = item.price * item.quantity;
+              html += `
+                    <li class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <strong>${item.quantity}x</strong> ${item.name} 
+                            <div class="text-muted small">R$ ${subtotal.toFixed(
+                              2
+                            )}</div>
+                        </div>
+                        <button class="btn-remover" data-id="${
+                          item.id
+                        }" title="Remover">×</button>
+                    </li>
+                `;
+            });
+
+            html += "</ul>";
+            html += `<div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+                        <h6 class="mb-0">Total:</h6>
+                        <h5 class="mb-0">R$ ${this.calcularTotal().toFixed(
+                          2
+                        )}</h5>
+                    </div>`;
+            html +=
+              '<a href="carrinho.html" class="btn btn-success w-100 py-2 fw-bold">Finalizar Pedido</a>';
+          } else {
+            html =
+              '<div class="text-center py-3"><i class="fas fa-shopping-cart fa-2x mb-3" style="color: #ddd;"></i><p class="mb-0">Carrinho vazio</p></div>';
+          }
+
+          carrinhoItens.innerHTML = html;
+
+          document.querySelectorAll(".btn-remover").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              const produtoId = e.target.getAttribute("data-id");
+              this.remover(produtoId);
+            });
+          });
+        },
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        Carrinho.atualizarUI();
+
+        document.querySelectorAll(".btn-adicionar").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const card = this.closest(".card");
+            const produtoId = card.dataset.produtoId;
+            const produtoNome = card.querySelector(".card-title").textContent;
+            const produtoPreco = card.dataset.produtoPreco;
+            const produtoImagem = card.querySelector(".card-img-top").src;
+            const quantidade = 1;
+
+            Carrinho.adicionar(
+              produtoId,
+              produtoNome,
+              produtoPreco,
+              quantidade,
+              produtoImagem
+            );
+
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-check me-2"></i> Adicionado!';
+            this.classList.add("btn-success");
+            setTimeout(() => {
+              this.innerHTML = originalText;
+            }, 2000);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
