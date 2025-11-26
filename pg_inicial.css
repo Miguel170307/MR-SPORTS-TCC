@@ -1,0 +1,200 @@
+ {
+background-color: var(--amarelo-bg);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #nav {
+      background: linear-gradient(
+        to right,
+        #d2a679,
+        var(--marrom-claro)
+      ) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+    }
+    .navbar-nav .nav-link {
+      color: var(--marrom-escuro) !important;
+      font-weight: 600;
+      margin: 0 10px;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #3a2e24 !important;
+      transform: translateY(-2px);
+    }
+    .navbar-nav .nav-link::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--marrom-escuro);
+      transition: width 0.3s;
+    }
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+    #carrinho img {
+      transition: transform 0.3s;
+    }
+    #carrinho:hover img {
+      transform: scale(1.1);
+    }
+
+    .hero-section {
+      background: url("") no-repeat center/cover;
+      height: 500px;
+      position: relative;
+      margin-bottom: 50px;
+    }
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      max-width: 600px;
+    }
+    .hero-title {
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .btn-hero {
+      background: var(--amarelo-destaque);
+      border: none;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-hero:hover {
+      background: #d4b970;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .carrinho-painel {
+      position: fixed;
+      top: 120px;
+      right: 20px;
+      width: 280px;
+      background: white;
+      padding: 20px;
+      border: 1px solid var(--amarelo-destaque);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+    .carrinho-painel:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    .carrinho-painel h4 {
+      color: var(--marrom-escuro);
+      border-bottom: 2px solid var(--amarelo-destaque);
+      padding-bottom: 10px;
+    }
+    .btn-remover {
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-remover:hover {
+      background: #bb2d3b;
+      transform: scale(1.1);
+    }
+
+    .section-title {
+      color: var(--marrom-escuro);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 40px;
+    }
+    .section-title::after {
+      content: "";
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background: var(--amarelo-destaque);
+      bottom: -10px;
+      left: 25%;
+    }
+    .card {
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s;
+      border: none;
+      border-radius: 12px !important;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    .card-img-top {
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--amarelo-destaque);
+    }
+    .badge-vendido {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #dc3545;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .combo-price {
+      color: var(--marrom-escuro) !important;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .btn-adicionar {
+      background: #28a745;
+      border: none;
+      transition: all 0.3s;
+      font-weight: 600;
+    }
+    .btn-adicionar:hover {
+      background: #218838;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: var(--marrom-escuro) !important;
+      padding: 50px 0 20px;
+      margin-top: 80px;
+    }
+    .footer-logo {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+    .footer-title {
+      color: var(--amarelo-destaque);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    .footer-contact i {
+      color: var(--amarelo-destaque);
+      margin-right: 10px;
+      width: 20px;
+    }
+    .footer-divider {
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      margin: 30px 0;
+    }
