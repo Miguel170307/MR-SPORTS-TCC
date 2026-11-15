@@ -1,0 +1,5 @@
+{
+  "buildCommand": "node prepare-vercel.cjs",
+  "outputDirectory": "public",
+  "framework": null
+}
