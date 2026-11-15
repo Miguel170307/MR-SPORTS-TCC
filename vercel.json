@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node prepare-vercel.cjs",
+  "buildCommand": "node prepare-vercel.cjs && node build-storefront.cjs",
   "outputDirectory": "public",
   "framework": null
 }
