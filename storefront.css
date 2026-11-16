@@ -15,3 +15,18 @@
 [data-theme="dark"] .remove{color:#efbc9f}
 [data-theme="dark"] .banner{background:#1b402f}
 @media(max-width:1000px){.nav{flex-wrap:wrap}.nav .links{width:100%;justify-content:space-between;flex-wrap:wrap}}
+
+/* Mudança suave de tema e resposta visual do botão. */
+body,.header,.hero,.hero-image,.product-media,.coming,.empty,.summary,.cart-item,.catalog-tools input,.footer,.topline,.banner,.tag,.buy-row select{
+ transition:background-color .4s ease,color .35s ease,border-color .35s ease;
+}
+.hero p,.eyebrow,.coming strong,.remove,.category,.price,.page-heading p,.footer p{
+ transition:color .35s ease;
+}
+.theme-toggle{gap:8px;transition:background-color .35s ease,color .35s ease,border-color .35s ease,transform .2s ease,box-shadow .25s ease}
+.theme-toggle:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.1)}
+.theme-toggle:active{transform:scale(.96)}
+.theme-toggle__icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;flex-shrink:0}
+.theme-toggle.is-changing .theme-toggle__icon{animation:theme-icon-turn .45s cubic-bezier(.2,.7,.3,1)}
+@keyframes theme-icon-turn{from{opacity:.25;transform:rotate(-100deg) scale(.65)}to{opacity:1;transform:rotate(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.theme-toggle,.theme-toggle__icon{animation:none!important;transform:none!important}}
